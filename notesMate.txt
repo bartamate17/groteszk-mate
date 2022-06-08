@@ -1,0 +1,55 @@
+Table Administration WebsiteⒸ - Notebook/Work Diary by Mate Barta
+
+Home Page: http://127.0.0.1:8000/home
+
+#-- Step by Step Work Guide --#
+
+1. - Install Laravel Work directory: 
+
+		->composer create-project laravel/laravel groteszkMate
+
+2. - Implementing Authentication in Laravel using Tailwind UI (Admin Panel):
+
+		->composer require laravel/ui, 
+
+		->php artisan jetstream:install livewire
+
+3. - Create Migrations & Make Seeder for first user authentication 
+
+		->php artisan make:migration create_users_table,
+		(also make create_company_table, create_employee_table)
+		->php artisan make:seeder UserSeeder,
+		(also employeeSeeder, controllerSeeder with faker for data)
+		->php artisan migrate
+		(create datatables)
+		->php artisan db:seed
+		(upload fakers)
+4. - CRUD Tasks
+		->php artisan make:model companyModel-m
+		->php artisan make:controller companyController --resource 
+		(make models & controllers, also homeModel - homeController, employeeModel - employeeController)
+
+5. - Set Route endpoint
+
+6. - Use index, create, store, edit, delete controller functions, attach table data params to view.
+
+7. - Handle client data (required params, picture min&max size) with $request->validate, also handle client file/logo.
+     ----> If logo exist, copy to public/logo directory. In case of missing file, the value = "" <----
+
+8. - Added Laravel Pagination, limit 10
+
+9. - Bootstrap template is used for the UI
+
+10. - Create mailing system
+
+		->php artisan make:mail NewCompanyReminderMail
+		(also edit e-mail content for basic rule & include in store function in case of adding new company)
+
+//LOCALIZATION - LARAVEL ANOMALY (see under the visible routes in comment)
+11. - Missing required parameter for [Route:companyEdit] [URI:{locale}/company/{id}/edit][Missing paraneter: id]
+
+	**** made locales, and lang.home.php file ****
+	**** Reference to: {{ __('home.adminDescriptipn') }} ****
+	**** until two params({locale} and {id}) has appeared, laravel was not capable of resolving the url correctly -> [Route:companyEdit] [URI:{locale}/company/{id}/edit][Missing paraneter: id] ****
+	**** the url was this for instance: https://localhost/barta-mate/groteszkMate/public/hu/company/16/edit ****
+	**** views.language.eng.app ==> you can find a commented language selection, that was the original idea ****
